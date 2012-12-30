@@ -190,7 +190,7 @@ public class List {
 
         Link prevElement = new Link(null, null);
         Link currentElement = first.getNext();
-        Link nextElement = currentElement.getNext();
+        Link nextElement;
 
         while (currentElement != null) {
             nextElement = currentElement.getNext();
