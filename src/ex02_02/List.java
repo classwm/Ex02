@@ -9,7 +9,6 @@ public class List {
         first = new Link(null, null);
     }
 
-    
     /**
      * Tworzy listę wypełnioną danymi z tablicy. Kolejnośc elementów tablicy i
      * listy pozostaje zachowana.
@@ -17,13 +16,12 @@ public class List {
      * @param names Tablica strongów do stworzenia listy
      */
     public List(String[] names) {
-        first = new Link(null, null);
+        this();
         for (int i = names.length - 1; i >= 0; i--) {
             insert(names[i], first);
         }
     }
 
-    
     /**
      * Tworzy listę z dwoma elementami
      *
@@ -34,7 +32,6 @@ public class List {
         this(new String[]{name1, name2});
     }
 
-    
     /**
      * Sprawdza, czy lista jest pusta (zawiera jedynie wartownika).
      *
@@ -49,7 +46,6 @@ public class List {
         }
     } // isEmpty
 
-    
     /**
      * Wstawia element o danej nazwie po podanym elemencie.
      *
@@ -62,7 +58,6 @@ public class List {
         prev.setNext(tmp);
     } // insert
 
-    
     /**
      * Usuwanie elementu nastepującego po podanym elemencie.
      *
@@ -84,7 +79,6 @@ public class List {
         }
     } // deleteNext
 
-    
     /**
      * Usuwanie elementu o podanej nazwie.
      *
@@ -104,7 +98,6 @@ public class List {
         }
     } //delete
 
-    
     /**
      * Wyszukiwanie elementu o danej nazwie.
      *
@@ -124,7 +117,6 @@ public class List {
         return (null);
     } //search
 
-    
     /**
      * Wyszukiwanie elementu o danej nazwie.
      *
@@ -144,7 +136,6 @@ public class List {
         return (false);
     } // isPresent
 
-    
     /**
      * Wypisywanie listy.
      */
@@ -159,7 +150,6 @@ public class List {
         System.out.println("");
     } // display
 
-    
     /**
      * Wypisywanie elementów listy wraz z identyfikatorem id.
      */
@@ -174,7 +164,6 @@ public class List {
         System.out.println("");
     } // displayWithId
 
-    
     /**
      * Zmiana nazwy elementu listy (do celów testowych). Zmieniona zostanie
      * nazwa każdego elementu listy, którego nazwa odpowiada podanemu
@@ -194,25 +183,49 @@ public class List {
         }
     } // nameChange
 
-    
     /**
      * Odwrócenie kolejności elementów na liście
      */
     public void reverse() {
 
-        Link prev = new Link(null, null);
-        Link current = first.getNext();
-        while (current != null) {
-            Link nextLink = current.getNext();
-            current.setNext(prev.getNext());
-            prev.setNext(current);
-            first.setNext(nextLink);
-            current = nextLink;
+        Link prevElement = new Link(null, null);
+        Link currentElement = first.getNext();
+        Link nextElement = currentElement.getNext();
+
+        while (currentElement != null) {
+            nextElement = currentElement.getNext();
+            currentElement.setNext(prevElement.getNext());
+            prevElement.setNext(currentElement);
+            first.setNext(nextElement);
+            currentElement = nextElement;
         }
-        first = prev;
+        first = prevElement;
     } // reverse
 
+    public List reverse2() {
+
+        List tmpList = new List();
+        Link link = first.getNext();
+        while (link != null) {
+            tmpList.insert(link.getName(), tmpList.getFirst());
+            link = link.getNext();
+        }
+        return tmpList;
+    } // reverse2
+
+   
+public void reverse3(Link curr) {
     
+        if(isEmpty()) { return;}     //curr == null
+        if(curr.getNext() == null) {
+            getFirst().setNext(curr);
+            return;
+        }
+        reverse3(curr.getNext());
+        curr.getNext().setNext(curr);
+        curr.setNext(null);
+    } // reverse3
+
     public Link getFirst() {
         return first;
     }

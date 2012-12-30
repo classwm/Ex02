@@ -68,6 +68,17 @@ public class Ex02_02 {
         separator("-", "Test konstruktora listy z dwoma stringami", 8);
         List listOfTwoStrings = new List("czarne", "koty"); //test konstrukotra listy z dwoma stringami
         listOfTwoStrings.display();
+        
+        separator("-", "Test reverse2", 8);
+        list.display();
+        list = list.reverse2();
+        list.display();
+        
+        separator("-", "Test reverse3", 8);
+        // list.reverse3(list.getFirst()).getNext();
+        // list.getFirst().setNext(list.reverse3(list.getFirst()).getNext());
+        list.reverse3((list.getFirst()).getNext());
+        list.display();
     }
 
     /**
